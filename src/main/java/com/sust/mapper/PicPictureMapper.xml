@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sust.dao.PicPictureMapper" >
+  <resultMap id="BaseResultMap" type="com.sust.entity.PicPicture" >
+    <id column="pi_id" property="piId" jdbcType="INTEGER" />
+    <result column="us_id" property="usId" jdbcType="INTEGER" />
+    <result column="pi_title" property="piTitle" jdbcType="VARCHAR" />
+    <result column="pi_sushe" property="piSushe" jdbcType="VARCHAR" />
+    <result column="pi_uptime" property="piUptime" jdbcType="TIMESTAMP" />
+    <result column="pi_str1" property="piStr1" jdbcType="VARCHAR" />
+    <result column="pi_str2" property="piStr2" jdbcType="VARCHAR" />
+    <result column="pi_str3" property="piStr3" jdbcType="VARCHAR" />
+    <result column="pi_str4" property="piStr4" jdbcType="VARCHAR" />
+    <result column="pi_str5" property="piStr5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pi_id, us_id, pi_title, pi_sushe, pi_uptime, pi_str1, pi_str2, pi_str3, pi_str4, 
+    pi_str5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.entity.PicPictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pic_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pic_picture
+    where pi_id = #{piId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pic_picture
+    where pi_id = #{piId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sust.entity.PicPictureExample" >
+    delete from pic_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sust.entity.PicPicture" >
+    insert into pic_picture (pi_id, us_id, pi_title, 
+      pi_sushe, pi_uptime, pi_str1, 
+      pi_str2, pi_str3, pi_str4, 
+      pi_str5)
+    values (#{piId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{piTitle,jdbcType=VARCHAR}, 
+      #{piSushe,jdbcType=VARCHAR}, #{piUptime,jdbcType=TIMESTAMP}, #{piStr1,jdbcType=VARCHAR}, 
+      #{piStr2,jdbcType=VARCHAR}, #{piStr3,jdbcType=VARCHAR}, #{piStr4,jdbcType=VARCHAR}, 
+      #{piStr5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.PicPicture" >
+    insert into pic_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="piId != null" >
+        pi_id,
+      </if>
+      <if test="usId != null" >
+        us_id,
+      </if>
+      <if test="piTitle != null" >
+        pi_title,
+      </if>
+      <if test="piSushe != null" >
+        pi_sushe,
+      </if>
+      <if test="piUptime != null" >
+        pi_uptime,
+      </if>
+      <if test="piStr1 != null" >
+        pi_str1,
+      </if>
+      <if test="piStr2 != null" >
+        pi_str2,
+      </if>
+      <if test="piStr3 != null" >
+        pi_str3,
+      </if>
+      <if test="piStr4 != null" >
+        pi_str4,
+      </if>
+      <if test="piStr5 != null" >
+        pi_str5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="piId != null" >
+        #{piId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="piTitle != null" >
+        #{piTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="piSushe != null" >
+        #{piSushe,jdbcType=VARCHAR},
+      </if>
+      <if test="piUptime != null" >
+        #{piUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="piStr1 != null" >
+        #{piStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr2 != null" >
+        #{piStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr3 != null" >
+        #{piStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr4 != null" >
+        #{piStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr5 != null" >
+        #{piStr5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sust.entity.PicPictureExample" resultType="java.lang.Integer" >
+    select count(*) from pic_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pic_picture
+    <set >
+      <if test="record.piId != null" >
+        pi_id = #{record.piId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usId != null" >
+        us_id = #{record.usId,jdbcType=INTEGER},
+      </if>
+      <if test="record.piTitle != null" >
+        pi_title = #{record.piTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piSushe != null" >
+        pi_sushe = #{record.piSushe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piUptime != null" >
+        pi_uptime = #{record.piUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.piStr1 != null" >
+        pi_str1 = #{record.piStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piStr2 != null" >
+        pi_str2 = #{record.piStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piStr3 != null" >
+        pi_str3 = #{record.piStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piStr4 != null" >
+        pi_str4 = #{record.piStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.piStr5 != null" >
+        pi_str5 = #{record.piStr5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pic_picture
+    set pi_id = #{record.piId,jdbcType=INTEGER},
+      us_id = #{record.usId,jdbcType=INTEGER},
+      pi_title = #{record.piTitle,jdbcType=VARCHAR},
+      pi_sushe = #{record.piSushe,jdbcType=VARCHAR},
+      pi_uptime = #{record.piUptime,jdbcType=TIMESTAMP},
+      pi_str1 = #{record.piStr1,jdbcType=VARCHAR},
+      pi_str2 = #{record.piStr2,jdbcType=VARCHAR},
+      pi_str3 = #{record.piStr3,jdbcType=VARCHAR},
+      pi_str4 = #{record.piStr4,jdbcType=VARCHAR},
+      pi_str5 = #{record.piStr5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.PicPicture" >
+    update pic_picture
+    <set >
+      <if test="usId != null" >
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="piTitle != null" >
+        pi_title = #{piTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="piSushe != null" >
+        pi_sushe = #{piSushe,jdbcType=VARCHAR},
+      </if>
+      <if test="piUptime != null" >
+        pi_uptime = #{piUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="piStr1 != null" >
+        pi_str1 = #{piStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr2 != null" >
+        pi_str2 = #{piStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr3 != null" >
+        pi_str3 = #{piStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr4 != null" >
+        pi_str4 = #{piStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="piStr5 != null" >
+        pi_str5 = #{piStr5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pi_id = #{piId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.PicPicture" >
+    update pic_picture
+    set us_id = #{usId,jdbcType=INTEGER},
+      pi_title = #{piTitle,jdbcType=VARCHAR},
+      pi_sushe = #{piSushe,jdbcType=VARCHAR},
+      pi_uptime = #{piUptime,jdbcType=TIMESTAMP},
+      pi_str1 = #{piStr1,jdbcType=VARCHAR},
+      pi_str2 = #{piStr2,jdbcType=VARCHAR},
+      pi_str3 = #{piStr3,jdbcType=VARCHAR},
+      pi_str4 = #{piStr4,jdbcType=VARCHAR},
+      pi_str5 = #{piStr5,jdbcType=VARCHAR}
+    where pi_id = #{piId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.sust.entity.PicPictureExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pic_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sust.dao.PicWordsMapper" >
+  <resultMap id="BaseResultMap" type="com.sust.entity.PicWords" >
+    <id column="wo_id" property="woId" jdbcType="INTEGER" />
+    <result column="us_id" property="usId" jdbcType="INTEGER" />
+    <result column="wo_us_id" property="woUsId" jdbcType="INTEGER" />
+    <result column="wo_about" property="woAbout" jdbcType="VARCHAR" />
+    <result column="wordscol" property="wordscol" jdbcType="VARCHAR" />
+    <result column="wo_str1" property="woStr1" jdbcType="VARCHAR" />
+    <result column="wo_str2" property="woStr2" jdbcType="VARCHAR" />
+    <result column="wo_str3" property="woStr3" jdbcType="VARCHAR" />
+    <result column="wo_str4" property="woStr4" jdbcType="VARCHAR" />
+    <result column="wo_str5" property="woStr5" jdbcType="VARCHAR" />
+    <result column="wo_str6" property="woStr6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wo_id, us_id, wo_us_id, wo_about, wordscol, wo_str1, wo_str2, wo_str3, wo_str4, wo_str5, 
+    wo_str6
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sust.entity.PicWordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pic_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pic_words
+    where wo_id = #{woId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pic_words
+    where wo_id = #{woId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sust.entity.PicWordsExample" >
+    delete from pic_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sust.entity.PicWords" >
+    insert into pic_words (wo_id, us_id, wo_us_id, 
+      wo_about, wordscol, wo_str1, 
+      wo_str2, wo_str3, wo_str4, 
+      wo_str5, wo_str6)
+    values (#{woId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{woUsId,jdbcType=INTEGER}, 
+      #{woAbout,jdbcType=VARCHAR}, #{wordscol,jdbcType=VARCHAR}, #{woStr1,jdbcType=VARCHAR}, 
+      #{woStr2,jdbcType=VARCHAR}, #{woStr3,jdbcType=VARCHAR}, #{woStr4,jdbcType=VARCHAR}, 
+      #{woStr5,jdbcType=VARCHAR}, #{woStr6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.PicWords" >
+    insert into pic_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="woId != null" >
+        wo_id,
+      </if>
+      <if test="usId != null" >
+        us_id,
+      </if>
+      <if test="woUsId != null" >
+        wo_us_id,
+      </if>
+      <if test="woAbout != null" >
+        wo_about,
+      </if>
+      <if test="wordscol != null" >
+        wordscol,
+      </if>
+      <if test="woStr1 != null" >
+        wo_str1,
+      </if>
+      <if test="woStr2 != null" >
+        wo_str2,
+      </if>
+      <if test="woStr3 != null" >
+        wo_str3,
+      </if>
+      <if test="woStr4 != null" >
+        wo_str4,
+      </if>
+      <if test="woStr5 != null" >
+        wo_str5,
+      </if>
+      <if test="woStr6 != null" >
+        wo_str6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="woId != null" >
+        #{woId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="woUsId != null" >
+        #{woUsId,jdbcType=INTEGER},
+      </if>
+      <if test="woAbout != null" >
+        #{woAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="wordscol != null" >
+        #{wordscol,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr1 != null" >
+        #{woStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr2 != null" >
+        #{woStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr3 != null" >
+        #{woStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr4 != null" >
+        #{woStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr5 != null" >
+        #{woStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr6 != null" >
+        #{woStr6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sust.entity.PicWordsExample" resultType="java.lang.Integer" >
+    select count(*) from pic_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pic_words
+    <set >
+      <if test="record.woId != null" >
+        wo_id = #{record.woId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usId != null" >
+        us_id = #{record.usId,jdbcType=INTEGER},
+      </if>
+      <if test="record.woUsId != null" >
+        wo_us_id = #{record.woUsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.woAbout != null" >
+        wo_about = #{record.woAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wordscol != null" >
+        wordscol = #{record.wordscol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr1 != null" >
+        wo_str1 = #{record.woStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr2 != null" >
+        wo_str2 = #{record.woStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr3 != null" >
+        wo_str3 = #{record.woStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr4 != null" >
+        wo_str4 = #{record.woStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr5 != null" >
+        wo_str5 = #{record.woStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.woStr6 != null" >
+        wo_str6 = #{record.woStr6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pic_words
+    set wo_id = #{record.woId,jdbcType=INTEGER},
+      us_id = #{record.usId,jdbcType=INTEGER},
+      wo_us_id = #{record.woUsId,jdbcType=INTEGER},
+      wo_about = #{record.woAbout,jdbcType=VARCHAR},
+      wordscol = #{record.wordscol,jdbcType=VARCHAR},
+      wo_str1 = #{record.woStr1,jdbcType=VARCHAR},
+      wo_str2 = #{record.woStr2,jdbcType=VARCHAR},
+      wo_str3 = #{record.woStr3,jdbcType=VARCHAR},
+      wo_str4 = #{record.woStr4,jdbcType=VARCHAR},
+      wo_str5 = #{record.woStr5,jdbcType=VARCHAR},
+      wo_str6 = #{record.woStr6,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.PicWords" >
+    update pic_words
+    <set >
+      <if test="usId != null" >
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="woUsId != null" >
+        wo_us_id = #{woUsId,jdbcType=INTEGER},
+      </if>
+      <if test="woAbout != null" >
+        wo_about = #{woAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="wordscol != null" >
+        wordscol = #{wordscol,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr1 != null" >
+        wo_str1 = #{woStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr2 != null" >
+        wo_str2 = #{woStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr3 != null" >
+        wo_str3 = #{woStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr4 != null" >
+        wo_str4 = #{woStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr5 != null" >
+        wo_str5 = #{woStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="woStr6 != null" >
+        wo_str6 = #{woStr6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wo_id = #{woId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.PicWords" >
+    update pic_words
+    set us_id = #{usId,jdbcType=INTEGER},
+      wo_us_id = #{woUsId,jdbcType=INTEGER},
+      wo_about = #{woAbout,jdbcType=VARCHAR},
+      wordscol = #{wordscol,jdbcType=VARCHAR},
+      wo_str1 = #{woStr1,jdbcType=VARCHAR},
+      wo_str2 = #{woStr2,jdbcType=VARCHAR},
+      wo_str3 = #{woStr3,jdbcType=VARCHAR},
+      wo_str4 = #{woStr4,jdbcType=VARCHAR},
+      wo_str5 = #{woStr5,jdbcType=VARCHAR},
+      wo_str6 = #{woStr6,jdbcType=VARCHAR}
+    where wo_id = #{woId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.sust.entity.PicWordsExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pic_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

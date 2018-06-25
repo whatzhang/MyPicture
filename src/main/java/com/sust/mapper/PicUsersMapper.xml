@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sust.dao.PicUsersMapper">
+	<resultMap id="BaseResultMap" type="com.sust.entity.PicUsers">
+		<id column="us_id" property="usId" jdbcType="INTEGER" />
+		<result column="us_name" property="usName" jdbcType="VARCHAR" />
+		<result column="us_lastdate" property="usLastdate" jdbcType="TIMESTAMP" />
+		<result column="us_str1" property="usStr1" jdbcType="VARCHAR" />
+		<result column="us_str2" property="usStr2" jdbcType="VARCHAR" />
+		<result column="us_str3" property="usStr3" jdbcType="VARCHAR" />
+		<result column="us_str4" property="usStr4" jdbcType="VARCHAR" />
+		<result column="us_str5" property="usStr5" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		us_id, us_name, us_lastdate, us_str1, us_str2, us_str3, us_str4, us_str5
+	</sql>
+	<select id="selectUsidByName" parameterType="String" resultType="java.lang.Integer">
+		select us_id from
+		pic_users
+		where us_name = #{name,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.sust.entity.PicUsersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from pic_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from pic_users
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from pic_users
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.sust.entity.PicUsersExample">
+		delete from pic_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.sust.entity.PicUsers">
+		insert into pic_users (us_id, us_name, us_lastdate,
+		us_str1, us_str2, us_str3,
+		us_str4, us_str5)
+		values (#{usId,jdbcType=INTEGER}, #{usName,jdbcType=VARCHAR},
+		#{usLastdate,jdbcType=TIMESTAMP},
+		#{usStr1,jdbcType=VARCHAR}, #{usStr2,jdbcType=VARCHAR}, #{usStr3,jdbcType=VARCHAR},
+		#{usStr4,jdbcType=VARCHAR}, #{usStr5,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.PicUsers">
+		insert into pic_users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="usName != null">
+				us_name,
+			</if>
+			<if test="usLastdate != null">
+				us_lastdate,
+			</if>
+			<if test="usStr1 != null">
+				us_str1,
+			</if>
+			<if test="usStr2 != null">
+				us_str2,
+			</if>
+			<if test="usStr3 != null">
+				us_str3,
+			</if>
+			<if test="usStr4 != null">
+				us_str4,
+			</if>
+			<if test="usStr5 != null">
+				us_str5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="usName != null">
+				#{usName,jdbcType=VARCHAR},
+			</if>
+			<if test="usLastdate != null">
+				#{usLastdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="usStr1 != null">
+				#{usStr1,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr2 != null">
+				#{usStr2,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr3 != null">
+				#{usStr3,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr4 != null">
+				#{usStr4,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr5 != null">
+				#{usStr5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.sust.entity.PicUsersExample"
+		resultType="java.lang.Integer">
+		select count(*) from pic_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update pic_users
+		<set>
+			<if test="record.usId != null">
+				us_id = #{record.usId,jdbcType=INTEGER},
+			</if>
+			<if test="record.usName != null">
+				us_name = #{record.usName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.usLastdate != null">
+				us_lastdate = #{record.usLastdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.usStr1 != null">
+				us_str1 = #{record.usStr1,jdbcType=VARCHAR},
+			</if>
+			<if test="record.usStr2 != null">
+				us_str2 = #{record.usStr2,jdbcType=VARCHAR},
+			</if>
+			<if test="record.usStr3 != null">
+				us_str3 = #{record.usStr3,jdbcType=VARCHAR},
+			</if>
+			<if test="record.usStr4 != null">
+				us_str4 = #{record.usStr4,jdbcType=VARCHAR},
+			</if>
+			<if test="record.usStr5 != null">
+				us_str5 = #{record.usStr5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update pic_users
+		set us_id = #{record.usId,jdbcType=INTEGER},
+		us_name = #{record.usName,jdbcType=VARCHAR},
+		us_lastdate = #{record.usLastdate,jdbcType=TIMESTAMP},
+		us_str1 = #{record.usStr1,jdbcType=VARCHAR},
+		us_str2 = #{record.usStr2,jdbcType=VARCHAR},
+		us_str3 = #{record.usStr3,jdbcType=VARCHAR},
+		us_str4 = #{record.usStr4,jdbcType=VARCHAR},
+		us_str5 = #{record.usStr5,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.PicUsers">
+		update pic_users
+		<set>
+			<if test="usName != null">
+				us_name = #{usName,jdbcType=VARCHAR},
+			</if>
+			<if test="usLastdate != null">
+				us_lastdate = #{usLastdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="usStr1 != null">
+				us_str1 = #{usStr1,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr2 != null">
+				us_str2 = #{usStr2,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr3 != null">
+				us_str3 = #{usStr3,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr4 != null">
+				us_str4 = #{usStr4,jdbcType=VARCHAR},
+			</if>
+			<if test="usStr5 != null">
+				us_str5 = #{usStr5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.PicUsers">
+		update pic_users
+		set us_name = #{usName,jdbcType=VARCHAR},
+		us_lastdate = #{usLastdate,jdbcType=TIMESTAMP},
+		us_str1 = #{usStr1,jdbcType=VARCHAR},
+		us_str2 = #{usStr2,jdbcType=VARCHAR},
+		us_str3 = #{usStr3,jdbcType=VARCHAR},
+		us_str4 = #{usStr4,jdbcType=VARCHAR},
+		us_str5 = #{usStr5,jdbcType=VARCHAR}
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<select resultMap="BaseResultMap" parameterType="com.sust.entity.PicUsersExample"
+		id="selectByExampleWithRowbounds">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from pic_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+</mapper>
